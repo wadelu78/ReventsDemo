@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './app/layout/App'
 import * as serviceWorker from './serviceWorker'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { configureStore } from './app/store/configureStore'
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -10,13 +13,20 @@ import * as serviceWorker from './serviceWorker'
 //   </React.StrictMode>,
 //   document.getElementById('root')
 // );
+const store = configureStore()
+
+console.log(store.getState())
 
 const rootEL = document.getElementById('root')
 
 let render = () => {
   ReactDOM.render(
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     </React.StrictMode>,
     rootEL
   )
